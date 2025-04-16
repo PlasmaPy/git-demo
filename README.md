@@ -138,13 +138,11 @@ The most common convention is to define:
    to make our changes in, and immediately switch to it. 
    We can change `feature-branch` to a more descriptive name.
    ```bash
-   git checkout -b feature-branch upstream/main 
+   git checkout -b feature-branch upstream/main
    ```
- 
-   > [!NOTE]
-   > A branch is a separate/isolated version of a project.
-   > Using branches lets us make an independent and isolated set of changes. 
-   > These changes later _merge_ back into the `main` branch.
+   A branch is a separate/isolated version of a project.
+   Using branches lets us make an independent and isolated set of changes. 
+   These changes later _merge_ back into the `main` branch.
 
 3. We created a branch on our computer. 
    Next we need to link that branch to GitHub.
