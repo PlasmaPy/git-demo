@@ -18,6 +18,10 @@ To follow along on Linux, please follow these instructions to install git: https
 
 ### Open a terminal
 
+ - macOS: _Finder_ → Applications → Utilities → Terminal
+ - Windows: Use the start menu item for Windows Subsystem for Linux or WSL
+ - Linux: ctrl-T
+
 ### Optionally configure `git`
 
 We can assign ourselves as the author of changes with the following command
@@ -37,28 +41,32 @@ git config --global user.email "your.email@example.com"
 ### Add a new SSH key to your GitHub account
 
 GitHub made its authentication process more strict in 2023, so now we 
-have to take some extra steps to make changes to a GitHub repository
-locally. 
+have to take some extra steps for security. 
+It's rather annoying, but typically need to be done once per computer. 
 
-1. Open a terminal.
-   - macOS: In the "Finder, go to _Applications_. Enter the _Utilities_
-     folder and then _Terminal_.
-   - Windows: open WSL
+Please follow the instructions (which depend on the operating system) at: 
 
-2. Run the following commands, changing your email address to the one 
+ - [Generate a new SSH key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent), and
+
+ - [Add the SSH key to your GitHub account](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account?platform=linux&tool=webui).
+
+
+#### Setting this up on Linux, CoCalc, and (probably) WSL
+
+1. Run the following commands, _changing your email address_ to the one 
    associated with your GitHub account.
 
    ```bash
    ssh-keygen -t ed25519 -C "your-email@domain.com" -f ~/.ssh/id_ed25519 -N ""
    ```
    
-3. Run the following commands:  
+2. Next run: 
    ```bash   
    eval "$(ssh-agent -s)"
    ssh-add ~/.ssh/id_ed25519
    ```
 
-4. **Copy** the contents of the file `~/.ssh/id_ed25519.pub`.  
+3. **Copy** the contents of the file `~/.ssh/id_ed25519.pub`.  
    In a Unix terminal, we can use the command `cat` (short for "concatenate")
    which will print out the contents of a file.
 
@@ -66,7 +74,7 @@ locally.
    cat ~/.ssh/id_ed25519.pub
    ```
    
-5. to https://github.com/settings/profile
+4. Go to https://github.com/settings/profile
    - In the "Access" section of the sidebar, click on "SSH and GPG keys"
    - Enter a descriptive title like "home laptop"
    - Click _New SSH key_ or _Add SSH key_
@@ -99,6 +107,11 @@ We can **fork** a repository to make our own copy of it on GitHub.
 
 ### Set up remotes
 
+A remote is the address of a repository hosted on GitHub. 
+The most common convention is to define:
+ - `upstream` as the primary repository
+ - `origin` as our fork of the repository 
+
 1. Enter the command:
    ```bash
    git remote add upstream git@github.com:PlasmaPy/git-demo.git
@@ -111,38 +124,53 @@ We can **fork** a repository to make our own copy of it on GitHub.
    
 ## Create a branch and connect it to GitHub
 
-1. Enter
-   ```git fetch --all```
+1. First, we need to update our clone so that it knows the current state of the primary and forked repositories:
+   ```bash
+   git fetch --all
+   ```
    
-2. Enter
+2. Next we need to create a [branch](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-branches). 
+   We can use the following command to create a new branch 
+   (based off of the `main` branch in the upstream repository)
+   and immediately switch to it.  
+   We can change `feature-branch` to a more descriptive name.
    ```bash
    git checkout -b feature-branch upstream/main 
    ```
+ 
+   > [!NOTE]
+   > A branch is a separate/isolated version of a project.
+   > Using branches lets us make an independent and isolated set of changes. 
+   > These changes later _merge_ back into the `main` branch.
 
-3. Enter
+3. We created a branch on our computer. 
+   Next we need to link that branch to GitHub.
    ```bash
-   git push --upstream feature-branch 
+   git push --set-upstream feature-branch 
    ```
 
-## Making changes
+## Adding, committing, and pushing changes
 
-1. Add a new file named `file.txt`.
-   In a Unix terminal, we can do this by 
+1. Edit a file and save the changes.
+   In a Unix terminal, for example, we can use a command like:
    ```bash 
    touch file1.txt
    ```
+   to create a blank file named `file1.txt`.
    
-2. Put it in the staging area
+2. To line up the changes that we want to record as a snapshot in history, run: 
    ```bash 
    git add file1.txt
    ```
 
-3. Now commit it
+3. To **commit** the changes (and preserve a snapshot of what each file looks like at this time in history), run:
    ```bash
    git commit -m "Add blank file1.txt"
    ```
-   
-4. Push it to GitHub
+   The `-m` is short for `--message`. We use the commit message — the 
+   text in quotes — to describe the changes that we made.
+
+4. After one or more commits, send (push) the changes to GitHub.
    ```bash
    git push
    ```
