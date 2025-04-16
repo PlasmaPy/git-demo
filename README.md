@@ -146,7 +146,7 @@ The most common convention is to define:
 3. We created a branch on our computer. 
    Next we need to link that branch to GitHub.
    ```bash
-   git push --set-upstream feature-branch 
+   git push --set-upstream origin feature-branch 
    ```
 
 ## Adding, committing, and pushing changes
