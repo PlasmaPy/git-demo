@@ -104,6 +104,7 @@ We can **fork** a repository to make our own copy of it on GitHub.
    ```bash
    git clone git@github.com:your-github-username/git-demo.git
    ```
+6. Type `cd git-demo` to enter the directory containing the clone, and type `ls` to see the contents.   
 
 ### Set up remotes
 
