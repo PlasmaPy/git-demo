@@ -8,21 +8,19 @@ To follow along on **Windows**, please [install Windows Subsystem for Linux](htt
 by running the following command in _PowerShell_ or _Windows Command Prompt_ in administrator mode:
 `wsl --install`
 
-To follow along on **macOS**, please [install git](https://github.com/git-guides/install-git#install-git-on-mac).  
-(Note: To enter commands in a terminal: open _Finder_, go to _Applications_,
-enter the _Utilities_ folder, and open _Terminal_.)
+To follow along on **macOS**, please [install git](https://github.com/git-guides/install-git#install-git-on-mac). (Note: To enter commands in a terminal: open _Finder_, go to _Applications_, enter the _Utilities_ folder, and open _Terminal_.)
 
-To follow along on Linux, please follow these instructions to install git: https://github.com/git-guides/install-git#install-git-on-linux
+To follow along on **Linux**, please follow these instructions to install git: https://github.com/git-guides/install-git#install-git-on-linux
 
 ## Getting ready to contribute
 
-### Open a terminal
+### Opening a terminal
 
  - macOS: _Finder_ → Applications → Utilities → Terminal
  - Windows: Use the start menu item for Windows Subsystem for Linux or WSL
- - Linux: ctrl-T
+ - Linux: ctrl + alt + T
 
-### Optionally configure `git`
+### Optionally configuring `git`
 
 We can assign ourselves as the author of changes with the following command
 — making sure to change "Your Name" to your name!
@@ -51,9 +49,12 @@ Please follow the instructions (which depend on the operating system) at:
  - [Add the SSH key to your GitHub account](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/adding-a-new-ssh-key-to-your-github-account?platform=linux&tool=webui).
 
 
-#### Setting this up on Linux, CoCalc, and (probably) WSL
+#### Adding an SSH key on Linux, CoCalc, and (probably) WSL
 
-1. Run the following commands, _changing your email address_ to the one 
+> [!NOTE]
+> Use the links above to set up an SSH key on macOS or Windows, unless using WSL. 
+
+1. Run the following command, _changing your email address_ to the one 
    associated with your GitHub account.
 
    ```bash
@@ -67,8 +68,8 @@ Please follow the instructions (which depend on the operating system) at:
    ```
 
 3. **Copy** the contents of the file `~/.ssh/id_ed25519.pub`.  
-   In a Unix terminal, we can use the command `cat` (short for "concatenate")
-   which will print out the contents of a file.
+   In a Unix terminal, the command `cat` (short for "concatenate")
+   prints out the contents of a file.
 
    ```bash
    cat ~/.ssh/id_ed25519.pub
@@ -98,8 +99,7 @@ We can **fork** a repository to make our own copy of it on GitHub.
 2. Click on the green button that says "<> Code ▼"
 3. Select the SSH tab
 4. Click on the copy button "⧉"
-5. Open a terminal.
-6. Type `git clone` followed by a space and then paste the text that you copied.
+5. In a terminal, type `git clone` followed by a space and then paste the text that you copied.
    The command should be like:
    ```bash
    git clone git@github.com:your-github-username/git-demo.git
@@ -107,12 +107,12 @@ We can **fork** a repository to make our own copy of it on GitHub.
 
 ### Set up remotes
 
-A remote is the address of a repository hosted on GitHub. 
+A **remote** is the address of a repository hosted on GitHub. 
 The most common convention is to define:
  - `upstream` as the primary repository
  - `origin` as our fork of the repository 
 
-1. Enter the command:
+1. Define the primary repository as the `upstream` remote 
    ```bash
    git remote add upstream git@github.com:PlasmaPy/git-demo.git
    ``` 
@@ -120,19 +120,22 @@ The most common convention is to define:
 2. To verify that the remotes have been entered correctly, type:
    ```bash
    git remote -v
-   ``` 
-   
-## Create a branch and connect it to GitHub
+   ```
+   This should display four lines, with `origin` pointing to your fork
+   and `upstream` pointing to the primary repository.
 
-1. First, we need to update our clone so that it knows the current state of the primary and forked repositories:
+## Code contribution workflow   
+
+### Create a branch and connect it to GitHub
+
+1. Update our clone so that it knows the current state of the primary and forked repositories:
    ```bash
    git fetch --all
    ```
    
-2. Next we need to create a [branch](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-branches). 
-   We can use the following command to create a new branch 
-   (based off of the `main` branch in the upstream repository)
-   and immediately switch to it.  
+2. Next, create a 
+   [branch](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-branches)
+   to make our changes in, and immediately switch to it. 
    We can change `feature-branch` to a more descriptive name.
    ```bash
    git checkout -b feature-branch upstream/main 
@@ -152,16 +155,16 @@ The most common convention is to define:
 ## Adding, committing, and pushing changes
 
 1. Edit a file and save the changes.
-   In a Unix terminal, for example, we can use a command like:
+   In a Unix shell, we can create a blank file with `touch`:
    ```bash 
    touch file1.txt
    ```
-   to create a blank file named `file1.txt`.
    
 2. To line up the changes that we want to record as a snapshot in history, run: 
    ```bash 
    git add file1.txt
    ```
+   This step is like putting items in a box that we want to mail.
 
 3. To **commit** the changes (and preserve a snapshot of what each file looks like at this time in history), run:
    ```bash
@@ -169,13 +172,17 @@ The most common convention is to define:
    ```
    The `-m` is short for `--message`. We use the commit message — the 
    text in quotes — to describe the changes that we made.
+   This step is like closing the box and putting it in outgoing mail.
 
 4. After one or more commits, send (push) the changes to GitHub.
    ```bash
    git push
    ```
+   This step is like mailing a box to GitHub.
 
 ## Making a pull request
+
+We're almost there!
 
 1. Go to https://github.com/PlasmaPy/git-demo.git
 2. There will be a banner that says something like "Make pull request". Click on it.
