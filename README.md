@@ -154,20 +154,23 @@ The most common convention is to define:
 ## Adding, committing, and pushing changes
 
 1. Edit a file and save the changes.
-   In a Unix shell, we can create a blank file with `touch`:
+   In a Unix shell, we can add text to a new file 
+   using `echo` (which prints out a string)
+   and `>` (which redirects the output of a command into a fil). 
+   
    ```bash 
-   touch file1.txt
+   echo "Hello, I'm Nick!" > new_file.txt
    ```
    
 2. To line up the changes that we want to record as a snapshot in history, run: 
    ```bash 
-   git add file1.txt
+   git add new_file.txt
    ```
    This step is like putting items in a box that we want to mail.
 
 3. To **commit** the changes (and preserve a snapshot of what each file looks like at this time in history), run:
    ```bash
-   git commit -m "Add blank file1.txt"
+   git commit -m "Add new file"
    ```
    The `-m` is short for `--message`. We use the commit message — the 
    text in quotes — to describe the changes that we made.
@@ -184,7 +187,16 @@ The most common convention is to define:
 We're almost there!
 
 1. Go to https://github.com/PlasmaPy/git-demo.git
-2. There will be a banner that says something like "Make pull request". Click on it.
+2. There will usually be a banner that says something like "Make pull request". Click on it.
 3. Add a title like "Add blank file" and (optionally) a description.
 4. Click on submit pull request.  
 5. Congratulations!
+
+> [!NOTE]
+> The banner might not appear if there was already a pull request, then: 
+> 1. Click on the "Pull requests" tab towards the upper left
+> 2. Click on "New pull request" toward the upper right
+> 3. Click on the link that says "compare across forks"
+> 4. Make sure that base respository is `PlasmaPy/git-demo`, base is `main`, and head repository is `your-github-username/git-demo`.
+> 5. Click on `compare: main`, and select `feature-branch` under branches.
+> 6. Click on "Create pull request"
